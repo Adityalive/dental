@@ -32,8 +32,12 @@ const Home = () => {
       
       
     </div>
-    <div className='bg-blue-700 h-42 w-screen'>
-        <h1> </h1>
+    <div className='bg-blue-700 h-42 w-screen p-10 pl-14 grid grid-cols-3 justify-between items-center text-2xl font-sans font-semibold'>
+        <h1> Need Dental Services? </h1>
+    
+         <h1> Need Dental Services? </h1>
+         <h1> Need Dental Services? </h1>
+
       </div>
     </>
   );
