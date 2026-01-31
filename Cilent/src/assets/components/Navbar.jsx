@@ -1,9 +1,11 @@
 import React, { useState, useEffect } from 'react';
-import { Menu, X, ChevronRight } from 'lucide-react'; // Optional: npm install lucide-react
+import { Menu, X, ChevronRight } from 'lucide-react'; 
+import { useNavigate } from 'react-router-dom'; // npm install lucide-react
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
+  const navigate = useNavigate();
 
   // Change background opacity on scroll
   useEffect(() => {
@@ -22,6 +24,11 @@ const Navbar = () => {
     { name: 'Contact', href: '#contact' },
   ];
 
+  const handleBookNow = () => {
+    navigate("/Book");
+    setIsOpen(false);
+  };
+
   return (
     <nav className={`fixed w-full z-50 transition-all duration-300 ${
       scrolled ? 'bg-white/90 backdrop-blur-md shadow-md py-3' : 'bg-transparent py-5'
@@ -29,7 +36,7 @@ const Navbar = () => {
       <div className="max-w-7xl mx-auto px-6 md:px-14 flex items-center justify-between">
         
         {/* 1. Logo */}
-        <div className="flex items-center gap-2">
+        <div className="flex items-center gap-2 cursor-pointer" onClick={() => navigate('/')}>
           <div className="w-10 h-10 bg-blue-600 rounded-xl flex items-center justify-center">
             <span className="text-white font-bold text-xl">D</span>
           </div>
@@ -56,17 +63,24 @@ const Navbar = () => {
 
         {/* 3. CTA Button (Desktop) */}
         <div className="hidden lg:block">
-          <button className="bg-blue-600 hover:bg-blue-700 text-white px-6 py-3 rounded-xl font-bold transition-all transform hover:scale-105 shadow-lg shadow-blue-600/20">
+          <button 
+            onClick={handleBookNow}
+            className="bg-blue-600 hover:bg-blue-700 text-white px-6 py-3 rounded-xl font-bold transition-all transform hover:scale-105 shadow-lg shadow-blue-600/20"
+          >
             Book Now
           </button>
         </div>
 
         {/* 4. Mobile Menu Toggle */}
         <button 
-          className="lg:hidden text-slate-900 p-2"
+          className="lg:hidden p-2"
           onClick={() => setIsOpen(!isOpen)}
         >
-          {isOpen ? <X size={28} className={scrolled ? 'text-slate-900' : 'text-white'} /> : <Menu size={28} className={scrolled ? 'text-slate-900' : 'text-white'} />}
+          {isOpen ? (
+            <X size={28} className={scrolled ? 'text-slate-900' : 'text-white'} />
+          ) : (
+            <Menu size={28} className={scrolled ? 'text-slate-900' : 'text-white'} />
+          )}
         </button>
       </div>
 
@@ -77,7 +91,9 @@ const Navbar = () => {
         <div className="flex flex-col h-full p-8">
           <div className="flex justify-between items-center mb-12">
             <span className="text-2xl font-bold text-slate-900">Menu</span>
-            <button onClick={() => setIsOpen(false)}><X size={32} /></button>
+            <button onClick={() => setIsOpen(false)}>
+              <X size={32} className="text-slate-900" />
+            </button>
           </div>
           
           <ul className="space-y-6">
@@ -86,7 +102,7 @@ const Navbar = () => {
                 <a 
                   href={link.href} 
                   onClick={() => setIsOpen(false)}
-                  className="text-2xl font-bold text-slate-800 flex justify-between items-center"
+                  className="text-2xl font-bold text-slate-800 flex justify-between items-center hover:text-blue-600 transition-colors"
                 >
                   {link.name} <ChevronRight className="text-blue-600" />
                 </a>
@@ -94,7 +110,10 @@ const Navbar = () => {
             ))}
           </ul>
 
-          <button className="mt-auto w-full bg-blue-600 text-white py-5 rounded-2xl font-bold text-xl shadow-xl shadow-blue-100">
+          <button 
+            onClick={handleBookNow}
+            className="mt-auto w-full bg-blue-600 hover:bg-blue-700 text-white py-5 rounded-2xl font-bold text-xl shadow-xl shadow-blue-100 transition-colors"
+          >
             Book Appointment
           </button>
         </div>

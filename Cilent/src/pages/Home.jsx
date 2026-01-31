@@ -1,6 +1,7 @@
 import React from 'react';
-
+import { useNavigate } from 'react-router-dom';
 const Home = () => {
+  let navigate=useNavigate();
   return (
     <main className="w-full">
       {/* 1. Hero Section */}
@@ -26,7 +27,9 @@ const Home = () => {
               Experience world-class dental treatments in a relaxing environment designed for your comfort and long-term health.
             </p>
             <div className="flex flex-wrap gap-4 pt-4">
-              <button className="bg-blue-600 hover:bg-blue-700 text-white px-8 py-4 rounded-2xl font-bold transition-all transform hover:-translate-y-1 shadow-lg shadow-blue-900/20">
+              <button onClick={()=>{
+                     navigate("/Book");
+              }} className="bg-blue-600 hover:bg-blue-700 text-white px-8 py-4 rounded-2xl font-bold transition-all transform hover:-translate-y-1 shadow-lg shadow-blue-900/20">
                 Book Appointment
               </button>
               <button className="bg-transparent border-2 border-white/30 hover:border-white text-white px-8 py-4 rounded-2xl font-bold transition-all backdrop-blur-sm">
